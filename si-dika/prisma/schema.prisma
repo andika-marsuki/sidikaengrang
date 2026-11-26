@@ -9,9 +9,11 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  // directUrl digunakan oleh prisma migrate & seed (bypass pgBouncer pooler)
-  directUrl = env("DIRECT_URL")
+  // DATABASE_URL_POOLED  = koneksi via pgBouncer pooler (untuk runtime)
+  // PRISMA_DATABASE_URL  = koneksi direct (untuk prisma migrate & seed)
+  // Fallback ke DATABASE_URL agar tetap kompatibel dengan .env lokal
+  url       = env("DATABASE_URL_POOLED")
+  directUrl = env("PRISMA_DATABASE_URL")
 }
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
