@@ -229,7 +229,6 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
               setStep(1);
               setDuration(null);
               setFallCount(0);
-              setStepCount(0);
               setRubrikScores(null);
               setError(null);
               setShowSavePrompt(false);
