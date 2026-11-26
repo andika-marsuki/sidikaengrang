@@ -9,6 +9,9 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+// Memanggil auth() saat request — tidak boleh di-prerender saat build
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "SI-DIKA — Sistem Informasi Digital Kebugaran Aktif",
   description:

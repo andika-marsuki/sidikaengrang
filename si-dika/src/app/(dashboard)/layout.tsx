@@ -10,6 +10,8 @@ import { signOut } from "@/lib/auth";
 import OfflineBanner from "@/components/shared/OfflineBanner";
 import SyncStatusBadge from "@/components/shared/SyncStatusBadge";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardLayout({
   children,
 }: {

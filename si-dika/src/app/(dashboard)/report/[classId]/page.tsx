@@ -10,6 +10,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ExportButtons from "./ExportButtons";
 
+export const dynamic = "force-dynamic";
+
 export default async function ReportPage({
   params,
 }: {

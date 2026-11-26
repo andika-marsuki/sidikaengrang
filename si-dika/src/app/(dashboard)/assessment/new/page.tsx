@@ -8,6 +8,8 @@ import { requireRole } from "@/lib/auth";
 import AssessmentWizard from "./AssessmentWizard";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = { title: "Penilaian Baru" };
 
 interface PageProps {

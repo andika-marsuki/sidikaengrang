@@ -8,6 +8,7 @@ import { requireRole } from "@/lib/auth";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Spesifikasi Egrang" };
 
 export default async function EgrangSpecsPage() {

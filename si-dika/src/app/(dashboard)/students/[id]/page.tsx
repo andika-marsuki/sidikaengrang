@@ -8,6 +8,8 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser, canAccessStudent } from "@/lib/auth";
 import { calcBMI, getBMICategory, recommendStepHeight } from "@/lib/bmi";
 import { notFound, redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import type { Metadata } from "next";
 import PrePostChart from "@/components/dashboard/PrePostChart";
