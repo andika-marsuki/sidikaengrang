@@ -3,10 +3,11 @@
 // SI-DIKA — GuestWizard
 // Assessment wizard untuk pengguna publik (tanpa login).
 // Semua kalkulasi berjalan di client — tidak ada data yang dikirim ke server.
+// Specs egrang diambil dari /api/egrang-specs; fallback ke data bawaan.
 // Saat user ingin simpan, tampilkan prompt untuk daftar/login.
 // =============================================================================
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Stopwatch from "@/components/field/Stopwatch";
 import CounterButton from "@/components/field/CounterButton";
@@ -20,10 +21,6 @@ interface SpecOption {
   id: string; name: string; stepHeightCm: number; poleLengthCm: number; material: string;
 }
 
-interface GuestWizardProps {
-  egrangSpecs: SpecOption[];
-}
-
 type WizardStep = 1 | 2 | 3 | 4;
 
 type ScoringResult = {
@@ -34,6 +31,13 @@ type ScoringResult = {
   predicate:        string;
   recommendation:   string;
 };
+
+// ─── Fallback specs (dipakai jika API belum selesai load) ─────────────────────
+const FALLBACK_SPECS: SpecOption[] = [
+  { id: "sd-20",  name: "Egrang SD Standar 20cm Bambu",      stepHeightCm: 20, poleLengthCm: 120, material: "Bambu" },
+  { id: "smp-30", name: "Egrang SMP Standar 30cm Bambu",     stepHeightCm: 30, poleLengthCm: 150, material: "Bambu" },
+  { id: "smp-40", name: "Egrang SMP Kompetisi 40cm Kayu",    stepHeightCm: 40, poleLengthCm: 160, material: "Kayu"  },
+];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -62,17 +66,17 @@ const predicateColor: Record<string, string> = {
 
 // ─── Komponen ─────────────────────────────────────────────────────────────────
 
-export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
-  const [step, setStep]   = useState<WizardStep>(1);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<ScoringResult | null>(null);
-  const [showSavePrompt, setShowSavePrompt] = useState(false);
+export default function GuestWizard() {
+  const [specs,    setSpecs]    = useState<SpecOption[]>(FALLBACK_SPECS);
+  const [step,     setStep]     = useState<WizardStep>(1);
+  const [error,    setError]    = useState<string | null>(null);
+  const [result,   setResult]   = useState<ScoringResult | null>(null);
 
   // Step 1 — identitas & antropometri
   const [name,      setName]      = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [gender,    setGender]    = useState<"L" | "P">("L");
-  const [specId,    setSpecId]    = useState(egrangSpecs[0]?.id ?? "");
+  const [specId,    setSpecId]    = useState(FALLBACK_SPECS[0].id);
   const [heightCm,  setHeightCm]  = useState("");
   const [weightKg,  setWeightKg]  = useState("");
 
@@ -84,27 +88,41 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
   // Step 3 — rubrik
   const [rubrikScores, setRubrikScores] = useState<RubrikScores | null>(null);
 
+  // ── Fetch specs dari API setelah mount ────────────────────────────────────
+  useEffect(() => {
+    fetch("/api/egrang-specs")
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setSpecs(json.data);
+          setSpecId(json.data[0].id);
+        }
+      })
+      .catch(() => {
+        // Gagal fetch → tetap pakai FALLBACK_SPECS, tidak perlu tampilkan error
+      });
+  }, []);
+
   // ── Step 1 submit ──────────────────────────────────────────────────────────
   const submitStep1 = () => {
-    if (!name.trim())    { setError("Masukkan nama."); return; }
-    if (!birthDate)      { setError("Masukkan tanggal lahir."); return; }
+    if (!name.trim())   { setError("Masukkan nama."); return; }
+    if (!birthDate)     { setError("Masukkan tanggal lahir."); return; }
     if (!heightCm || !weightKg) { setError("Isi tinggi dan berat badan."); return; }
     if (parseFloat(heightCm) < 50 || parseFloat(heightCm) > 250) { setError("Tinggi tidak valid (50–250 cm)."); return; }
     if (parseFloat(weightKg) < 10 || parseFloat(weightKg) > 200) { setError("Berat tidak valid (10–200 kg)."); return; }
-    if (!specId) { setError("Pilih spesifikasi egrang."); return; }
     setError(null);
     setStep(2);
   };
 
   // ── Step 2 submit ──────────────────────────────────────────────────────────
   const submitStep2 = () => {
-    if (!duration)                   { setError("Hentikan stopwatch untuk mencatat waktu."); return; }
-    if (parseFloat(trackDist) < 5)   { setError("Jarak lintasan minimal 5 m."); return; }
+    if (!duration)                 { setError("Hentikan stopwatch untuk mencatat waktu."); return; }
+    if (parseFloat(trackDist) < 5) { setError("Jarak lintasan minimal 5 m."); return; }
     setError(null);
     setStep(3);
   };
 
-  // ── Step 3: rubrik selesai → langsung hitung ───────────────────────────────
+  // ── Step 3: rubrik selesai ─────────────────────────────────────────────────
   const handleRubrikComplete = useCallback((scores: RubrikScores) => {
     setRubrikScores(scores);
     setStep(4);
@@ -113,9 +131,6 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
   // ── Step 4: hitung skor ────────────────────────────────────────────────────
   const handleCalculate = () => {
     if (!rubrikScores || !duration) return;
-
-    const age = ageYears(birthDate);
-
     const scoring = calcFinalScore({
       scoreStatic:     rubrikScores.scoreStatic,
       scoreDynamic:    rubrikScores.scoreDynamic,
@@ -124,11 +139,20 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
       fallCount,
       durationSeconds: duration,
       trackDistanceM:  parseFloat(trackDist),
-      ageYears:        age,
+      ageYears:        ageYears(birthDate),
       gender,
     });
-
     setResult(scoring);
+  };
+
+  // ── Reset ──────────────────────────────────────────────────────────────────
+  const handleReset = () => {
+    setResult(null);
+    setStep(1);
+    setDuration(null);
+    setFallCount(0);
+    setRubrikScores(null);
+    setError(null);
   };
 
   // ── Render: Hasil ──────────────────────────────────────────────────────────
@@ -145,9 +169,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
 
           {/* Header hasil */}
           <div className="bg-gray-900 rounded-2xl p-8 text-center">
-            <div className="text-6xl mb-3">
-              {predicateEmoji[result.predicate] ?? "🏃"}
-            </div>
+            <div className="text-6xl mb-3">{predicateEmoji[result.predicate] ?? "🏃"}</div>
             <h2 className="text-white text-2xl font-bold">Hasil Penilaian</h2>
             <p className="text-gray-400 text-sm mt-1">{name}</p>
 
@@ -199,40 +221,30 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
           </div>
 
           {/* CTA simpan */}
-          {!showSavePrompt ? (
-            <div className="bg-gradient-to-r from-yellow-900/40 to-green-900/40 border border-yellow-700/50 rounded-2xl p-5 text-center">
-              <p className="text-yellow-200 font-semibold text-sm">💾 Simpan hasil ini?</p>
-              <p className="text-gray-400 text-xs mt-1 mb-4">
-                Daftarkan akun gratis untuk menyimpan riwayat penilaian, cetak laporan, dan bandingkan perkembangan.
-              </p>
-              <div className="flex gap-3 justify-center">
-                <Link
-                  href="/register"
-                  className="px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-xl transition-colors"
-                >
-                  Daftar Gratis
-                </Link>
-                <Link
-                  href="/login"
-                  className="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold text-sm rounded-xl transition-colors"
-                >
-                  Sudah punya akun
-                </Link>
-              </div>
+          <div className="bg-gradient-to-r from-yellow-900/40 to-green-900/40 border border-yellow-700/50 rounded-2xl p-5 text-center">
+            <p className="text-yellow-200 font-semibold text-sm">💾 Simpan hasil ini?</p>
+            <p className="text-gray-400 text-xs mt-1 mb-4">
+              Daftarkan akun gratis untuk menyimpan riwayat penilaian, cetak laporan, dan bandingkan perkembangan.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <Link
+                href="/register"
+                className="px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm rounded-xl transition-colors"
+              >
+                Daftar Gratis
+              </Link>
+              <Link
+                href="/login"
+                className="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold text-sm rounded-xl transition-colors"
+              >
+                Sudah punya akun
+              </Link>
             </div>
-          ) : null}
+          </div>
 
           {/* Tombol coba lagi */}
           <button
-            onClick={() => {
-              setResult(null);
-              setStep(1);
-              setDuration(null);
-              setFallCount(0);
-              setRubrikScores(null);
-              setError(null);
-              setShowSavePrompt(false);
-            }}
+            onClick={handleReset}
             className="w-full py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold rounded-xl transition-colors"
           >
             ↺ Penilaian Baru
@@ -251,28 +263,20 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
         <div className="mb-6 flex items-start justify-between">
           <div>
             <h1 className="text-white text-2xl font-bold">🏃 Coba Penilaian Egrang</h1>
-            <p className="text-gray-400 text-sm mt-1">
-              Tanpa akun • Hasil tampil langsung • Gratis
-            </p>
+            <p className="text-gray-400 text-sm mt-1">Tanpa akun • Hasil tampil langsung • Gratis</p>
           </div>
           <div className="text-right text-xs text-gray-500 mt-1">
             Punya akun?{" "}
-            <Link href="/login" className="text-yellow-400 hover:text-yellow-300">
-              Masuk →
-            </Link>
+            <Link href="/login" className="text-yellow-400 hover:text-yellow-300">Masuk →</Link>
           </div>
         </div>
 
         {/* Stepper */}
         <div className="flex gap-2 mb-6">
           {["1 Identitas", "2 Lapangan", "3 Rubrik", "4 Hitung"].map((label, i) => (
-            <div
-              key={i}
-              className={`flex-1 h-1.5 rounded-full transition-colors ${
-                i < step - 1 ? "bg-green-500" :
-                i === step - 1 ? "bg-yellow-400" : "bg-gray-700"
-              }`}
-            />
+            <div key={label} className={`flex-1 h-1.5 rounded-full transition-colors ${
+              i < step - 1 ? "bg-green-500" : i === step - 1 ? "bg-yellow-400" : "bg-gray-700"
+            }`} />
           ))}
         </div>
 
@@ -283,7 +287,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
           </div>
         )}
 
-        {/* ─── STEP 1: Identitas & Antropometri ─────────────────────────────── */}
+        {/* ─── STEP 1 ───────────────────────────────────────────────────────── */}
         {step === 1 && (
           <div className="bg-gray-900 rounded-2xl p-6 space-y-5">
             <h2 className="text-white text-lg font-bold">Langkah 1: Identitas & Antropometri</h2>
@@ -291,9 +295,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
             <div>
               <label className="block text-gray-400 text-sm mb-1">Nama Lengkap *</label>
               <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                type="text" value={name} onChange={(e) => setName(e.target.value)}
                 placeholder="Nama siswa"
                 className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
               />
@@ -303,9 +305,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
               <div>
                 <label className="block text-gray-400 text-sm mb-1">Tanggal Lahir *</label>
                 <input
-                  type="date"
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
+                  type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}
                   max={new Date().toISOString().split("T")[0]}
                   className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
                 />
@@ -314,13 +314,9 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
                 <label className="block text-gray-400 text-sm mb-1">Jenis Kelamin *</label>
                 <div className="flex gap-2 mt-1">
                   {(["L", "P"] as const).map((g) => (
-                    <button
-                      key={g}
-                      onClick={() => setGender(g)}
+                    <button key={g} onClick={() => setGender(g)}
                       className={`flex-1 py-3 rounded-xl font-bold text-sm transition-colors ${
-                        gender === g
-                          ? "bg-yellow-400 text-gray-900"
-                          : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                        gender === g ? "bg-yellow-400 text-gray-900" : "bg-gray-800 text-gray-400 hover:bg-gray-700"
                       }`}
                     >
                       {g === "L" ? "Laki-laki" : "Perempuan"}
@@ -332,12 +328,10 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
 
             <div>
               <label className="block text-gray-400 text-sm mb-1">Spesifikasi Egrang *</label>
-              <select
-                value={specId}
-                onChange={(e) => setSpecId(e.target.value)}
+              <select value={specId} onChange={(e) => setSpecId(e.target.value)}
                 className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
               >
-                {egrangSpecs.map((s) => (
+                {specs.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.name} — pijakan {s.stepHeightCm}cm ({s.material})
                   </option>
@@ -348,30 +342,21 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-gray-400 text-sm mb-1">Tinggi Badan (cm) *</label>
-                <input
-                  type="number"
-                  value={heightCm}
-                  onChange={(e) => setHeightCm(e.target.value)}
-                  placeholder="mis. 155"
-                  min={50} max={250}
+                <input type="number" value={heightCm} onChange={(e) => setHeightCm(e.target.value)}
+                  placeholder="mis. 155" min={50} max={250}
                   className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
                 />
               </div>
               <div>
                 <label className="block text-gray-400 text-sm mb-1">Berat Badan (kg) *</label>
-                <input
-                  type="number"
-                  value={weightKg}
-                  onChange={(e) => setWeightKg(e.target.value)}
-                  placeholder="mis. 48"
-                  min={10} max={200}
+                <input type="number" value={weightKg} onChange={(e) => setWeightKg(e.target.value)}
+                  placeholder="mis. 48" min={10} max={200}
                   className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
                 />
               </div>
             </div>
 
-            <button
-              onClick={submitStep1}
+            <button onClick={submitStep1}
               className="w-full py-4 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded-xl text-lg transition-colors"
             >
               Lanjut ke Lapangan →
@@ -379,7 +364,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
           </div>
         )}
 
-        {/* ─── STEP 2: Data Lapangan ─────────────────────────────────────────── */}
+        {/* ─── STEP 2 ───────────────────────────────────────────────────────── */}
         {step === 2 && (
           <div className="space-y-4">
             <h2 className="text-white text-lg font-bold">Langkah 2: Data Lapangan</h2>
@@ -388,13 +373,9 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
               <label className="block text-gray-400 text-sm mb-2">Jarak Lintasan (m)</label>
               <div className="flex gap-2">
                 {[5, 10, 15, 20].map((d) => (
-                  <button
-                    key={d}
-                    onClick={() => setTrackDist(String(d))}
+                  <button key={d} onClick={() => setTrackDist(String(d))}
                     className={`flex-1 py-3 rounded-xl font-bold transition-colors ${
-                      trackDist === String(d)
-                        ? "bg-yellow-400 text-gray-900"
-                        : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                      trackDist === String(d) ? "bg-yellow-400 text-gray-900" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                     }`}
                   >
                     {d}m
@@ -407,19 +388,15 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
 
             <div className="bg-gray-900 rounded-2xl p-4">
               <div className="flex justify-around">
-                <CounterButton label="Jatuh"   icon="⬇️" color="red"  onChange={setFallCount} />
+                <CounterButton label="Jatuh" icon="⬇️" color="red" onChange={setFallCount} />
               </div>
             </div>
 
             <div className="flex gap-3">
-              <button
-                onClick={() => setStep(1)}
-                className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl"
-              >
+              <button onClick={() => setStep(1)} className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl">
                 ← Kembali
               </button>
-              <button
-                onClick={submitStep2}
+              <button onClick={submitStep2}
                 className="flex-1 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded-xl transition-colors"
               >
                 Lanjut ke Rubrik →
@@ -428,21 +405,18 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
           </div>
         )}
 
-        {/* ─── STEP 3: Rubrik ───────────────────────────────────────────────── */}
+        {/* ─── STEP 3 ───────────────────────────────────────────────────────── */}
         {step === 3 && (
           <div className="space-y-4">
             <h2 className="text-white text-lg font-bold">Langkah 3: Penilaian Rubrik</h2>
             <RubrikForm sessionKey="rubrik_guest" onComplete={handleRubrikComplete} />
-            <button
-              onClick={() => setStep(2)}
-              className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl"
-            >
+            <button onClick={() => setStep(2)} className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl">
               ← Kembali
             </button>
           </div>
         )}
 
-        {/* ─── STEP 4: Konfirmasi & Hitung ─────────────────────────────────── */}
+        {/* ─── STEP 4 ───────────────────────────────────────────────────────── */}
         {step === 4 && rubrikScores && (
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4">
             <h2 className="text-white text-lg font-bold">Langkah 4: Konfirmasi & Hitung Skor</h2>
@@ -455,8 +429,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
               </p>
               <p className="text-gray-300"><span className="text-gray-500">TB/BB:</span> {heightCm} cm / {weightKg} kg</p>
               <p className="text-gray-300">
-                <span className="text-gray-500">Waktu:</span> {duration}s •{" "}
-                Jarak: {trackDist}m • Jatuh: {fallCount}x
+                <span className="text-gray-500">Waktu:</span> {duration}s • Jarak: {trackDist}m • Jatuh: {fallCount}x
               </p>
               <p className="text-gray-300">
                 <span className="text-gray-500">Rubrik:</span>{" "}
@@ -471,14 +444,10 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
             </div>
 
             <div className="flex gap-3">
-              <button
-                onClick={() => setStep(3)}
-                className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl"
-              >
+              <button onClick={() => setStep(3)} className="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl">
                 ← Kembali
               </button>
-              <button
-                onClick={handleCalculate}
+              <button onClick={handleCalculate}
                 className="flex-1 py-3 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl transition-colors"
               >
                 🧮 Hitung Skor
