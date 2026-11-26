@@ -1,0 +1,22 @@
+=== SI-EGRANG Status Check === 
+ 
+[node_modules] 
+EXISTS 
+ 
+[.bin\prisma.cmd] 
+EXISTS 
+ 
+[.prisma\client\index.js] 
+EXISTS (Prisma generated OK
+MISSING (need: npx prisma generate) 
+ 
+[.prisma\client\query_engine] 
+MISSING 
+ 
+[prisma\migrations] 
+No migrations folder 
+ 
+[.env.local] 
+EXISTS 
+ 
+=== End === 

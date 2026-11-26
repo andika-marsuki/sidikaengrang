@@ -1,0 +1,50 @@
+name: CI — SI-DIKA
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-test-build:
+    name: Lint → Test → Build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: si-dika
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: si-dika/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Build production
+        env:
+          # Gunakan DATABASE_URL dummy untuk type-check saja (tidak ada koneksi DB saat build)
+          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://user:pass@localhost:5432/si_dika' }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL || 'postgresql://user:pass@localhost:5432/si_dika' }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET || 'ci-build-secret-placeholder-32chars' }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'ci-build-secret-placeholder-32chars' }}
+          AUTH_URL: "https://si-dika.vercel.app"
+          NEXTAUTH_URL: "https://si-dika.vercel.app"
+        run: npm run build

@@ -1,0 +1,7 @@
+============================================ 
+SI-EGRANG Setup Log 
+============================================ 
+ 
+[1/6] Approving install scripts... 
+Approved @prisma/client:
+  added @prisma/client@6.19.3

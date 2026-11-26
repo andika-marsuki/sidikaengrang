@@ -1,0 +1,99 @@
+EXIT:0
+
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/KIRO/sidikaenggrang/si-egrang[39m
+
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 7 (L) ÔåÆ target 0.35, minimum 0.15
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 9 (L) ÔåÆ masih dalam rentang 7-9
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 10 (L) ÔåÆ target 0.50
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 12 (P) ÔåÆ target 0.45
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 13 (L) ÔåÆ target 0.65
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 15 (P) ÔåÆ target 0.55
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 16 (L) ÔåÆ target 0.75
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 18 (P) ÔåÆ target 0.60
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 5 (L) ÔåÆ fallback target 0.50
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 20 (P) ÔåÆ fallback target 0.45
+ [32mÔ£ô[39m src/lib/__tests__/speed-norms.test.ts[2m > [22mgetSpeedNorm[2m > [22musia 13: L lebih cepat dari P (target L > target P)
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22m160 cm / 55 kg ÔåÆ 21.5
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22m170 cm / 70 kg ÔåÆ 24.2
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22m150 cm / 40 kg ÔåÆ 17.8
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22mtinggi 0 ÔåÆ lempar error
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22mberat 0 ÔåÆ lempar error
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mcalcBMI[2m > [22mnilai negatif ÔåÆ lempar error
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mgetBMICategory[2m > [22mBMI < 18.5 ÔåÆ Kurang Berat
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mgetBMICategory[2m > [22m18.5 Ôëñ BMI < 25 ÔåÆ Normal
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mgetBMICategory[2m > [22m25 Ôëñ BMI < 30 ÔåÆ Kelebihan Berat
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mgetBMICategory[2m > [22mBMI ÔëÑ 30 ÔåÆ Obesitas
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtinggi < 130 ÔåÆ pijakan 15-20 cm
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtepat di batas bawah (< 130) ÔåÆ pijakan rendah
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtinggi 130-159 ÔåÆ pijakan 20-30 cm
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtepat 130 ÔåÆ pijakan standar SD/SMP
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtinggi ÔëÑ 160 ÔåÆ pijakan 30-40 cm
+ [32mÔ£ô[39m src/lib/__tests__/bmi.test.ts[2m > [22mrecommendStepHeight[2m > [22mtepat 160 ÔåÆ pijakan SMP/SMA
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22mtidak jatuh + lintasan 15m ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22mtidak jatuh + lintasan 20m ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22mtidak jatuh + lintasan 10m (< 15) ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22m1 jatuh + lintasan 15m ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22m1 jatuh + lintasan 10m ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckZeroFall[2m > [22mtepat 0 jatuh + tepat 15m ÔåÆ earned (batas inklusif)
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckIronBalance[2m > [22mstatis=4 dan dinamis=4 ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckIronBalance[2m > [22mstatis=4 tapi dinamis=3 ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckIronBalance[2m > [22mstatis=3 dan dinamis=4 ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckIronBalance[2m > [22mkeduanya 3 ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckIronBalance[2m > [22mkeduanya 1 ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mPOST_TEST meningkat tepat 15% ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mPOST_TEST meningkat lebih dari 15% ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mPOST_TEST meningkat kurang dari 15% ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mPRE_TEST (bukan POST_TEST) ÔåÆ tidak earned meskipun skor tinggi
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mPRACTICE ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mpriorPreTestScore null ÔåÆ tidak earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mpriorPreTestScore 0 ÔåÆ tidak earned (hindari divisi-by-zero)
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mcheckMostImproved[2m > [22mBudi seed: pre=39.2, post=70.3 ÔåÆ peningkatan ~79% ÔåÆ earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mevaluateBadges[2m > [22mSiti seed: ZERO_FALL Ô£ô, IRON_BALANCE Ô£ô, MOST_IMPROVED Ô£ù (bukan post-test)
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mevaluateBadges[2m > [22mBudi seed: post-test dengan prior 39.2 ÔåÆ MOST_IMPROVED Ô£ô
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mevaluateBadges[2m > [22mevaluateBadges selalu mengembalikan 3 entries
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mevaluateBadges[2m > [22msemua badges: kode tersedia di setiap entry
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mgetEarnedBadges[2m > [22mhanya mengembalikan badge yang earned
+ [32mÔ£ô[39m src/lib/__tests__/badge-engine.test.ts[2m > [22mgetEarnedBadges[2m > [22mtidak ada yang earned ÔåÆ array kosong
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22msemua skor 4 ÔåÆ 40 poin penuh
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22msemua skor 1 ÔåÆ 10 poin minimum
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22msemua skor 2 ÔåÆ 20 poin
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22msemua skor 3 ÔåÆ 30 poin
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22mcampuran: (4+3+2+1)/16*40 = 25
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcRubricComponent[2m > [22mnilai desimal dibulatkan dengan benar
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22mtidak jatuh ÔåÆ 35 poin penuh
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22m1 jatuh ÔåÆ 30
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22m7 jatuh ÔåÆ 0 (habis penalti)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22mlebih dari 7 jatuh ÔåÆ tidak pernah negatif
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22m3 jatuh ÔåÆ 20
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcBalanceComponent[2m > [22m6 jatuh ÔåÆ 5
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mdurasi nol ÔåÆ 0 (tidak error)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mdurasi negatif ÔåÆ 0
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mkecepatan tepat di target norm ÔåÆ ~16.67 poin (1/1.5 * 25)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mkecepatan 1.5├ù target ÔåÆ 25 poin (cap)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mkecepatan jauh melebihi norm ÔåÆ tetap 25 (tidak melebihi cap)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcSpeedComponent[2m > [22mperempuan usia 13 menggunakan norm berbeda dari laki-laki
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgetPredicateLabel[2m > [22mÔëÑ85 ÔåÆ Prima
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgetPredicateLabel[2m > [22m70ÔÇô84.9 ÔåÆ Kompeten
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgetPredicateLabel[2m > [22m55ÔÇô69.9 ÔåÆ Berkembang
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgetPredicateLabel[2m > [22m<55 ÔåÆ Perlu Pendampingan
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22msemua indikator tinggi + tidak banyak jatuh ÔåÆ kalimat pertahankan
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mfallCount ÔëÑ 3 ÔåÆ rekomendasi jatuh muncul di awal
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mscoreCoord = 1 (terlemah) ÔåÆ rekomendasi koordinasi muncul
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mscoreStatic = 1 ÔåÆ rekomendasi keseimbangan statis muncul
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mscoreDynamic = 2 ÔåÆ rekomendasi zig-zag muncul
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mscorePosture = 2 ÔåÆ rekomendasi core/plank muncul
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mgenerateRecommendation[2m > [22mbeberapa indikator lemah ÔåÆ beberapa rekomendasi digabungkan dengan |
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcFinalScore[2m > [22minput data Budi seed: Pre-Test ÔåÆ ~39.2 (Perlu Pendampingan)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcFinalScore[2m > [22minput data Budi seed: Post-Test ÔåÆ ~70 (Kompeten)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcFinalScore[2m > [22minput Siti seed: Pre-Test ÔåÆ ÔëÑ85 (Prima)
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcFinalScore[2m > [22mskor tidak pernah melebihi 100
+ [32mÔ£ô[39m src/lib/__tests__/scoring-engine.test.ts[2m > [22mcalcFinalScore[2m > [22mkomponen dikembalikan dengan benar
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m86 passed[39m[22m[90m (86)[39m
+[2m   Start at [22m 17:10:36
+[2m   Duration [22m 6.59s[2m (transform 795ms, setup 0ms, collect 1.13s, tests 120ms, environment 15ms, prepare 3.37s)[22m
+
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m

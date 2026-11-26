@@ -1,0 +1,163 @@
+// =============================================================================
+// SI-DIKA — Prisma Schema
+// Sesuai design.md §3
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // directUrl digunakan oleh prisma migrate & seed (bypass pgBouncer pooler)
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum Gender {
+  L
+  P
+}
+
+enum TestType {
+  PRE_TEST
+  POST_TEST
+  PRACTICE
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+/// Pengguna sistem: Admin sekolah, Guru PJOK, atau akun Siswa (viewer).
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  /// Password disimpan sebagai bcrypt hash — JANGAN simpan plaintext.
+  password    String
+  role        Role     @default(TEACHER)
+  /// Reserved untuk pengembangan multi-sekolah di masa depan.
+  schoolId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assessments Assessment[]
+
+  @@index([role])
+  @@map("users")
+}
+
+/// Data master siswa. NISN unik per sekolah/sistem.
+model Student {
+  id           String   @id @default(cuid())
+  nisn         String   @unique
+  name         String
+  /// Format: "VII-A", "VIII-B", dst.
+  className    String
+  /// Format: "2024/2025"
+  academicYear String
+  gender       Gender
+  birthDate    DateTime
+  /// Soft-delete: set false untuk menyembunyikan tanpa menghapus data historis.
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  assessments Assessment[]
+  badges      StudentBadge[]
+
+  @@index([className, academicYear])
+  @@index([nisn])
+  @@map("students")
+}
+
+/// Spesifikasi standar alat egrang yang digunakan dalam sesi pengujian.
+model EgrangSpec {
+  id           String   @id @default(cuid())
+  /// Nama deskriptif, misal: "Egrang SD Standar 30cm Bambu"
+  name         String
+  /// Tinggi pijakan dari tanah (cm)
+  stepHeightCm Int
+  /// Panjang total tongkat (cm)
+  poleLengthCm Int
+  /// "Bambu" | "Kayu" | "Fiberglass"
+  material     String
+  createdAt    DateTime @default(now())
+
+  assessments Assessment[]
+
+  @@map("egrang_specs")
+}
+
+/// Satu sesi penilaian per siswa per sesi uji (pre/post/practice).
+model Assessment {
+  id           String     @id @default(cuid())
+  studentId    String
+  student      Student    @relation(fields: [studentId], references: [id])
+  teacherId    String
+  teacher      User       @relation(fields: [teacherId], references: [id])
+  egrangSpecId String
+  egrangSpec   EgrangSpec @relation(fields: [egrangSpecId], references: [id])
+  testType     TestType   @default(PRE_TEST)
+
+  // ── Antropometri saat tes ──────────────────────────────────────────────────
+  heightCm Float
+  weightKg Float
+  /// Dihitung otomatis: weightKg / (heightCm/100)^2
+  bmi      Float
+
+  // ── Data Lapangan ──────────────────────────────────────────────────────────
+  trackDistanceM  Float @default(10.0)
+  durationSeconds Float
+  fallCount       Int   @default(0)
+  stepCount       Int?
+
+  // ── Rubrik Motorik (skala 1–4) ─────────────────────────────────────────────
+  /// Keseimbangan statis: kemampuan berdiri diam ≥5 detik
+  scoreStatic  Int
+  /// Keseimbangan dinamis: pusat gravitasi saat berjalan
+  scoreDynamic Int
+  /// Koordinasi mata-tangan-kaki
+  scoreCoord   Int
+  /// Daya tahan postur & genggaman
+  scorePosture Int
+
+  // ── Hasil Kalkulasi (dihitung oleh scoring-engine.ts) ──────────────────────
+  finalScore     Float
+  /// "Prima" | "Kompeten" | "Berkembang" | "Perlu Pendampingan"
+  predicate      String
+  recommendation String @db.Text
+
+  // ── Audit & Sync ───────────────────────────────────────────────────────────
+  assessedAt DateTime @default(now())
+  syncedAt   DateTime @default(now())
+  /// ID dari IndexedDB (Dexie) — digunakan sebagai idempotency key saat sync.
+  /// Format: cuid() yang dibuat di client sebelum dikirim ke server.
+  localId    String?  @unique
+
+  @@index([studentId, testType, assessedAt])
+  @@index([teacherId])
+  @@map("assessments")
+}
+
+/// Lencana digital yang diraih siswa berdasarkan kriteria performa.
+model StudentBadge {
+  id        String   @id @default(cuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id])
+  /// "ZERO_FALL" | "IRON_BALANCE" | "MOST_IMPROVED"
+  badgeCode String
+  badgeTitle String
+  awardedAt DateTime @default(now())
+
+  /// Satu jenis badge hanya bisa diraih sekali per siswa.
+  @@unique([studentId, badgeCode])
+  @@map("student_badges")
+}

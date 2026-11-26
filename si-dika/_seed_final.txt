@@ -1,0 +1,26 @@
+EXIT:0
+STDOUT:
+­ƒî▒ Memulai seed database SI-EGRANG...
+
+Ô£ô Data lama dihapus.
+Ô£ô 3 user dibuat: Admin, Teacher, Student
+Ô£ô 3 EgrangSpec dibuat.
+Ô£ô 5 siswa dibuat.
+Ô£ô 4 assessment dibuat (Pre & Post Budi, Pre Siti, Pre Dimas).
+Ô£ô 3 badge diberikan (Siti: ZERO_FALL + IRON_BALANCE, Budi: MOST_IMPROVED).
+
+ÔòöÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòù
+Ôòæ           SEED SELESAI ÔÇö Akun Login                 Ôòæ
+ÔòáÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòú
+Ôòæ  ADMIN   : admin@si-egrang.sch.id   / Admin@12345   Ôòæ
+Ôòæ  TEACHER : guru.pjok@si-egrang.sch.id / Guru@12345  Ôòæ
+Ôòæ  STUDENT : 1234567890@siswa.si-egrang.sch.id        Ôòæ
+Ôòæ            (NISN Budi Santoso) / Siswa@12345        Ôòæ
+ÔòÜÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòØ
+
+Budi Pre-Test  ÔåÆ 39.2 (Perlu Pendampingan)
+Budi Post-Test ÔåÆ 70.3 (Kompeten)
+Siti Pre-Test  ÔåÆ 92.7 (Prima)
+  
+
+STDERR:

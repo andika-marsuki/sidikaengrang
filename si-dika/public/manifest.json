@@ -1,0 +1,35 @@
+{
+  "name": "SI-DIKA — Sistem Informasi Digital Kebugaran Aktif",
+  "short_name": "SI-DIKA",
+  "description": "Aplikasi penilaian kebugaran jasmani berbasis permainan egrang untuk Guru PJOK",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#FACC15",
+  "orientation": "portrait-primary",
+  "categories": ["education", "sports"],
+  "lang": "id",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mulai Penilaian",
+      "short_name": "Nilai",
+      "description": "Langsung buka modul penilaian lapangan",
+      "url": "/assessment",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+🌱 Memulai seed database SI-EGRANG...
+
+✓ Data lama dihapus.
+✓ 3 user dibuat: Admin, Teacher, Student
+✓ 3 EgrangSpec dibuat.
+✓ 5 siswa dibuat.
+✓ 4 assessment dibuat (Pre & Post Budi, Pre Siti, Pre Dimas).
+✓ 3 badge diberikan (Siti: ZERO_FALL + IRON_BALANCE, Budi: MOST_IMPROVED).
+
+╔══════════════════════════════════════════════════════╗
+║           SEED SELESAI — Akun Login                 ║
+╠══════════════════════════════════════════════════════╣
+║  ADMIN   : admin@si-egrang.sch.id   / Admin@12345   ║
+║  TEACHER : guru.pjok@si-egrang.sch.id / Guru@12345  ║
+║  STUDENT : 1234567890@siswa.si-egrang.sch.id        ║
+║            (NISN Budi Santoso) / Siswa@12345        ║
+╚══════════════════════════════════════════════════════╝
+
+Budi Pre-Test  → 39.2 (Perlu Pendampingan)
+Budi Post-Test → 70.3 (Kompeten)
+Siti Pre-Test  → 92.7 (Prima)
+  
