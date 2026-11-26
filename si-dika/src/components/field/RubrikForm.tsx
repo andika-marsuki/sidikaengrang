@@ -28,7 +28,7 @@ const RUBRIK_STEPS: RubrikStep[] = [
     label: "Keseimbangan Statis",
     icon:  "🧍",
     criteria: [
-      { score: 1, title: "Tidak Mampu",    description: "Tidak dapat berdiri diam di atas egrang lebih dari 2 detik tanpa bantuan." },
+      { score: 1, title: "Tidak Mampu",    description: "Tidak dapat berdiri diam di atas engrang lebih dari 2 detik tanpa bantuan." },
       { score: 2, title: "Perlu Bantuan",  description: "Berdiri diam 2–5 detik, sesekali perlu menyentuh permukaan untuk keseimbangan." },
       { score: 3, title: "Cukup Stabil",   description: "Berdiri diam 5–10 detik secara konsisten tanpa bantuan." },
       { score: 4, title: "Sangat Stabil",  description: "Berdiri diam >10 detik dengan postur tegak dan kendali penuh." },

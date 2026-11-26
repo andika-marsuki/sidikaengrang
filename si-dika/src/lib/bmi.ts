@@ -28,7 +28,7 @@ export function getBMICategory(bmi: number): string {
 }
 
 /**
- * Merekomendasikan tinggi pijakan egrang yang aman berdasarkan tinggi badan siswa.
+ * Merekomendasikan tinggi pijakan engrang yang aman berdasarkan tinggi badan siswa.
  *
  * Prinsip: pijakan ≈ 15–25% tinggi badan agar masih bisa mendarat dengan aman.
  * - Tinggi badan < 130 cm → pijakan 15–20 cm (maks 20 cm)

@@ -75,7 +75,7 @@ async function main() {
   const specSD = await prisma.egrangSpec.create({
     data: {
       id:           createId(),
-      name:         "Egrang SD Standar 20cm Bambu",
+      name:         "Engrang SD Standar 20cm Bambu",
       stepHeightCm: 20,
       poleLengthCm: 120,
       material:     "Bambu",
@@ -85,7 +85,7 @@ async function main() {
   const specSMP = await prisma.egrangSpec.create({
     data: {
       id:           createId(),
-      name:         "Egrang SMP Standar 30cm Bambu",
+      name:         "Engrang SMP Standar 30cm Bambu",
       stepHeightCm: 30,
       poleLengthCm: 150,
       material:     "Bambu",
@@ -95,7 +95,7 @@ async function main() {
   const specSMPKayu = await prisma.egrangSpec.create({
     data: {
       id:           createId(),
-      name:         "Egrang SMP Kompetisi 40cm Kayu",
+      name:         "Engrang SMP Kompetisi 40cm Kayu",
       stepHeightCm: 40,
       poleLengthCm: 160,
       material:     "Kayu",

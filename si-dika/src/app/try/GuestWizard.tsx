@@ -3,7 +3,7 @@
 // SI-DIKA — GuestWizard
 // Assessment wizard untuk pengguna publik (tanpa login).
 // Semua kalkulasi berjalan di client — tidak ada data yang dikirim ke server.
-// Specs egrang diambil dari /api/egrang-specs; fallback ke data bawaan.
+// Specs engrang diambil dari /api/egrang-specs; fallback ke data bawaan.
 // Saat user ingin simpan, tampilkan prompt untuk daftar/login.
 // =============================================================================
 
@@ -34,9 +34,9 @@ type ScoringResult = {
 
 // ─── Fallback specs (dipakai jika API belum selesai load) ─────────────────────
 const FALLBACK_SPECS: SpecOption[] = [
-  { id: "sd-20",  name: "Egrang SD Standar 20cm Bambu",      stepHeightCm: 20, poleLengthCm: 120, material: "Bambu" },
-  { id: "smp-30", name: "Egrang SMP Standar 30cm Bambu",     stepHeightCm: 30, poleLengthCm: 150, material: "Bambu" },
-  { id: "smp-40", name: "Egrang SMP Kompetisi 40cm Kayu",    stepHeightCm: 40, poleLengthCm: 160, material: "Kayu"  },
+  { id: "sd-20",  name: "Engrang SD Standar 20cm Bambu",      stepHeightCm: 20, poleLengthCm: 120, material: "Bambu" },
+  { id: "smp-30", name: "Engrang SMP Standar 30cm Bambu",     stepHeightCm: 30, poleLengthCm: 150, material: "Bambu" },
+  { id: "smp-40", name: "Engrang SMP Kompetisi 40cm Kayu",    stepHeightCm: 40, poleLengthCm: 160, material: "Kayu"  },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -201,7 +201,7 @@ export default function GuestWizard() {
             </div>
           </div>
 
-          {/* BMI & rekomendasi egrang */}
+          {/* BMI & rekomendasi engrang */}
           <div className="bg-gray-900 rounded-2xl p-5 space-y-2 text-sm">
             <h3 className="text-gray-300 font-semibold">📊 Data Fisik</h3>
             <p className="text-gray-400">
@@ -262,7 +262,7 @@ export default function GuestWizard() {
         {/* Header */}
         <div className="mb-6 flex items-start justify-between">
           <div>
-            <h1 className="text-white text-2xl font-bold">🏃 Coba Penilaian Egrang</h1>
+            <h1 className="text-white text-2xl font-bold">🏃 Coba Penilaian Engrang</h1>
             <p className="text-gray-400 text-sm mt-1">Tanpa akun • Hasil tampil langsung • Gratis</p>
           </div>
           <div className="text-right text-xs text-gray-500 mt-1">
@@ -327,7 +327,7 @@ export default function GuestWizard() {
             </div>
 
             <div>
-              <label className="block text-gray-400 text-sm mb-1">Spesifikasi Egrang *</label>
+              <label className="block text-gray-400 text-sm mb-1">Spesifikasi Engrang *</label>
               <select value={specId} onChange={(e) => setSpecId(e.target.value)}
                 className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm"
               >

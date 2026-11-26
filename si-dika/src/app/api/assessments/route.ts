@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     // Cek egrangSpec exist
     const egrangSpec = await prisma.egrangSpec.findUnique({ where: { id: data.egrangSpecId } });
     if (!egrangSpec) {
-      return NextResponse.json({ success: false, error: "Spesifikasi egrang tidak ditemukan" }, { status: 404 });
+      return NextResponse.json({ success: false, error: "Spesifikasi engrang tidak ditemukan" }, { status: 404 });
     }
 
     // Idempotency: jika localId sudah ada, kembalikan assessment yang sudah ada

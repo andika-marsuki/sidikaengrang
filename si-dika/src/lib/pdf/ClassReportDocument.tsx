@@ -212,7 +212,7 @@ export default function ClassReportDocument({
     <Document
       title={`Rapor Kelas ${className}`}
       author="SI-DIKA"
-      subject="Laporan Penilaian Egrang"
+      subject="Laporan Penilaian Engrang"
     >
       {/* Page 1: Ringkasan Kelas (landscape) */}
       <Page size="A4" style={s.page} orientation="landscape">
@@ -221,7 +221,7 @@ export default function ClassReportDocument({
             SI-DIKA - Sistem Informasi Digital Kebugaran Aktif
           </Text>
           <Text style={s.reportTitle}>
-            RAPOR PENILAIAN EGRANG - KELAS {className.toUpperCase()}
+            RAPOR PENILAIAN ENGRANG - KELAS {className.toUpperCase()}
           </Text>
           <Text style={s.meta}>
             Tahun Ajaran: {academicYear} | Guru PJOK: {teacherName} |

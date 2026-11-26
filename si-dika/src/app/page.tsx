@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "SI-DIKA — Sistem Informasi Digital Kebugaran Aktif",
   description:
-    "Penilaian egrang berbasis digital untuk guru PJOK. Coba gratis, daftar untuk menyimpan rekam perkembangan siswa.",
+    "Penilaian engrang berbasis digital untuk guru PJOK. Coba gratis, daftar untuk menyimpan rekam perkembangan siswa.",
 };
 
 export default async function LandingPage() {
@@ -54,7 +54,7 @@ export default async function LandingPage() {
           ✨ Gratis untuk semua guru PJOK
         </div>
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
-          Penilaian Egrang{" "}
+          Penilaian Engrang{" "}
           <span className="text-yellow-400">Digital</span>{" "}
           untuk Guru PJOK
         </h1>

@@ -84,7 +84,7 @@ const RECOMMENDATION_MAP: Record<string, string> = {
   scoreStatic:
     "Latihan keseimbangan statis: berdiri di atas batu bata 10×20 cm selama 10 detik, tingkatkan durasi tiap sesi.",
   scoreDynamic:
-    "Latihan lintasan zig-zag ringan dengan tongkat kayu setinggi pinggang sebelum naik egrang.",
+    "Latihan lintasan zig-zag ringan dengan tongkat kayu setinggi pinggang sebelum naik engrang.",
   scorePosture:
     "Latihan penguatan core: plank 20 detik × 3 set, dan latihan genggaman dengan bola tenis.",
   fallCount:

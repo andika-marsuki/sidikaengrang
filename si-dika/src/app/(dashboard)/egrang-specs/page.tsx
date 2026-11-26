@@ -9,7 +9,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "Spesifikasi Egrang" };
+export const metadata: Metadata = { title: "Spesifikasi Engrang" };
 
 export default async function EgrangSpecsPage() {
   await requireRole(["ADMIN", "TEACHER"]);
@@ -23,7 +23,7 @@ export default async function EgrangSpecsPage() {
       {/* Header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Spesifikasi Egrang</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Spesifikasi Engrang</h1>
           <p className="text-sm text-gray-500 mt-1">
             Standar alat yang digunakan dalam assessment
           </p>
@@ -39,7 +39,7 @@ export default async function EgrangSpecsPage() {
       {/* Grid */}
       {specs.length === 0 ? (
         <div className="text-center py-16 text-gray-400 bg-white rounded-xl border border-gray-200">
-          <p className="text-lg">Belum ada spesifikasi egrang.</p>
+          <p className="text-lg">Belum ada spesifikasi engrang.</p>
           <p className="text-sm mt-2">Klik tombol di atas untuk menambahkan.</p>
         </div>
       ) : (

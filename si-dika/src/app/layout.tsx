@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | SI-DIKA",
   },
   description:
-    "Sistem Informasi Digital Kebugaran Aktif berbasis permainan tradisional egrang untuk mata pelajaran PJOK",
+    "Sistem Informasi Digital Kebugaran Aktif berbasis permainan tradisional engrang untuk mata pelajaran PJOK",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

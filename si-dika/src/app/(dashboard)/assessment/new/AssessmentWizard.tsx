@@ -76,7 +76,7 @@ export default function AssessmentWizard({ students, egrangSpecs, preselectedStu
 
   // ── Step 1: submit ──────────────────────────────────────────────────────────
   const submitStep1 = () => {
-    if (!studentId || !specId) { setError("Pilih siswa dan spesifikasi egrang."); return; }
+    if (!studentId || !specId) { setError("Pilih siswa dan spesifikasi engrang."); return; }
     if (!heightCm || !weightKg) { setError("Isi tinggi dan berat badan."); return; }
     if (parseFloat(heightCm) < 50 || parseFloat(heightCm) > 250) { setError("Tinggi tidak valid (50–250 cm)."); return; }
     if (parseFloat(weightKg) < 10 || parseFloat(weightKg) > 200) { setError("Berat tidak valid (10–200 kg)."); return; }
@@ -292,7 +292,7 @@ export default function AssessmentWizard({ students, egrangSpecs, preselectedStu
             </div>
 
             <div>
-              <label className="block text-gray-400 text-sm mb-1">Spesifikasi Egrang *</label>
+              <label className="block text-gray-400 text-sm mb-1">Spesifikasi Engrang *</label>
               <select
                 value={specId}
                 onChange={(e) => setSpecId(e.target.value)}

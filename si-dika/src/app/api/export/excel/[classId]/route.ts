@@ -143,7 +143,7 @@ export async function GET(
         "Jenis Tes",
         "Tanggal Tes",
         "Guru Penilai",
-        "Spesifikasi Egrang",
+        "Spesifikasi Engrang",
         "Komponen Rubrik (maks 40)",
         "Komponen Keseimbangan (maks 35)",
         "Komponen Kecepatan (maks 25)",

@@ -273,7 +273,7 @@ export default async function StudentProfilePage({ params }: PageProps) {
                           Dinilai oleh: <span className="font-medium">{assessment.teacher.name}</span>
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
-                          Egrang: {assessment.egrangSpec.name} • Waktu: {assessment.durationSeconds}s • Jatuh:{" "}
+                          Engrang: {assessment.egrangSpec.name} • Waktu: {assessment.durationSeconds}s • Jatuh:{" "}
                           {assessment.fallCount}x
                         </p>
                       </div>

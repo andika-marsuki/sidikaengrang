@@ -75,7 +75,7 @@ export default function RegisterPage() {
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Daftar Akun</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Daftar untuk menyimpan hasil penilaian egrang
+            Daftar untuk menyimpan hasil penilaian engrang
           </p>
         </div>
 

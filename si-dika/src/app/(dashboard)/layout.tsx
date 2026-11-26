@@ -41,7 +41,7 @@ export default async function DashboardLayout({
               </Link>
               {(user.role === "ADMIN" || user.role === "TEACHER") && (
                 <Link href="/egrang-specs" className="text-gray-700 hover:text-yellow-600 font-medium">
-                  Spesifikasi Egrang
+                  Spesifikasi Engrang
                 </Link>
               )}
               {(user.role === "ADMIN" || user.role === "TEACHER") && (
