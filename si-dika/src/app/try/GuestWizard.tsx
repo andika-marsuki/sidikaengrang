@@ -79,7 +79,6 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
   // Step 2 — lapangan
   const [duration,  setDuration]  = useState<number | null>(null);
   const [fallCount, setFallCount] = useState(0);
-  const [stepCount, setStepCount] = useState(0);
   const [trackDist, setTrackDist] = useState("10");
 
   // Step 3 — rubrik
@@ -115,9 +114,7 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
   const handleCalculate = () => {
     if (!rubrikScores || !duration) return;
 
-    const height  = parseFloat(heightCm);
-    const weight  = parseFloat(weightKg);
-    const age     = ageYears(birthDate);
+    const age = ageYears(birthDate);
 
     const scoring = calcFinalScore({
       scoreStatic:     rubrikScores.scoreStatic,
@@ -412,7 +409,6 @@ export default function GuestWizard({ egrangSpecs }: GuestWizardProps) {
             <div className="bg-gray-900 rounded-2xl p-4">
               <div className="flex justify-around">
                 <CounterButton label="Jatuh"   icon="⬇️" color="red"  onChange={setFallCount} />
-                <CounterButton label="Langkah" icon="👟" color="blue" onChange={setStepCount} />
               </div>
             </div>
 

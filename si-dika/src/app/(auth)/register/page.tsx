@@ -7,7 +7,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 export default function RegisterPage() {
   const router = useRouter();

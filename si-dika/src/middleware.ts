@@ -13,7 +13,6 @@
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
 // Buat middleware Auth.js dari edge-compatible config (tanpa Prisma)
 const { auth } = NextAuth(authConfig);

@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       { success: true, message: "Akun berhasil dibuat. Silakan login.", user },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[POST /api/auth/register]", error);
     return NextResponse.json({ success: false, error: "Terjadi kesalahan. Coba lagi." }, { status: 500 });
   }

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import GuestWizard from "./GuestWizard";
 import { prisma } from "@/lib/prisma";
 
+// Halaman ini membaca DB saat request — jangan di-prerender saat build
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Coba Penilaian — SI-DIKA",
   description: "Coba penilaian egrang secara gratis tanpa perlu akun.",
