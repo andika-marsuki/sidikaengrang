@@ -7,6 +7,7 @@
 import { redirect } from "next/navigation";
 import { auth, signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -142,9 +143,23 @@ export default async function LoginPage({ searchParams }: PageProps) {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-gray-400 mt-6">
-          Lupa password? Hubungi Administrator Sekolah.
-        </p>
+        <div className="mt-6 space-y-2 text-center">
+          <p className="text-sm text-gray-500">
+            Belum punya akun?{" "}
+            <Link href="/register" className="text-yellow-600 hover:text-yellow-700 font-medium">
+              Daftar sekarang
+            </Link>
+          </p>
+          <p className="text-xs text-gray-400">
+            Atau{" "}
+            <Link href="/try" className="text-green-600 hover:text-green-700 font-medium">
+              coba tanpa akun →
+            </Link>
+          </p>
+          <p className="text-xs text-gray-400 pt-1">
+            Lupa password? Hubungi Administrator Sekolah.
+          </p>
+        </div>
       </div>
     </div>
   );

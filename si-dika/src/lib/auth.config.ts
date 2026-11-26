@@ -59,8 +59,15 @@ export const authConfig = {
       const { pathname } = request.nextUrl;
 
       // Route publik — selalu diizinkan
-      const publicPaths = ["/login", "/api/auth", "/api/health"];
-      if (publicPaths.some((p) => pathname.startsWith(p))) return true;
+      const publicPaths = [
+        "/login",
+        "/register",
+        "/try",
+        "/api/auth",
+        "/api/health",
+        "/api/egrang-specs",
+      ];
+      if (pathname === "/" || publicPaths.some((p) => pathname === p || pathname.startsWith(p + "/"))) return true;
 
       // Static assets — selalu diizinkan
       if (pathname.match(/\.(ico|png|jpg|svg|woff2?|css|js)$/)) return true;

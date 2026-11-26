@@ -23,10 +23,20 @@ export default auth((req) => {
   const session = req.auth;
 
   // ── Route publik — selalu diizinkan ──────────────────────────────────────
-  const publicPaths = ["/login", "/api/auth", "/api/health"];
-  if (publicPaths.some((p) => pathname.startsWith(p))) {
+  const publicPaths = [
+    "/login",
+    "/register",
+    "/try",
+    "/api/auth",
+    "/api/health",
+    "/api/egrang-specs",   // publik: dibutuhkan halaman /try
+  ];
+  if (publicPaths.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
     return NextResponse.next();
   }
+
+  // Root "/" juga publik (landing page)
+  if (pathname === "/") return NextResponse.next();
 
   // ── Tidak ada session → redirect ke /login ────────────────────────────────
   if (!session?.user) {
